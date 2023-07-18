@@ -1,14 +1,11 @@
 package com.Flights.controller;
 
 import com.Flights.payload.FlightDto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.Flights.service.FlightService;
-
 import java.util.List;
 
 @RestController
@@ -26,9 +23,9 @@ public class FlightController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<FlightDto> saveFlight(@RequestBody FlightDto flightDto) {
 
-        FlightDto savedFlightDto = flightService.saveFlight(flightDto);
+        FlightDto dto = flightService.saveFlight(flightDto);
 
-        return new ResponseEntity<>(savedFlightDto, HttpStatus.CREATED) ;
+        return new ResponseEntity<>(dto, HttpStatus.CREATED) ;
     }
 
     @GetMapping("/search")
@@ -36,6 +33,7 @@ public class FlightController {
             @RequestParam String departureCity,
             @RequestParam String arrivalCity,
             @RequestParam String dateOfDeparture) {
+
         List<FlightDto> flightDtos = flightService.searchFlights(departureCity, arrivalCity, dateOfDeparture);
         return new ResponseEntity<>(flightDtos, HttpStatus.OK);
     }

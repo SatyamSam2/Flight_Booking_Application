@@ -5,17 +5,14 @@ import com.Flights.payload.FlightDto;
 import com.Flights.repository.FlightRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class FlightServiceImpl implements FlightService{
 
-    private FlightRepository flightRepository;
+    private final FlightRepository flightRepository;
     private ModelMapper modelMapper;
 
     @Autowired
@@ -32,9 +29,7 @@ public class FlightServiceImpl implements FlightService{
 
         Flight savedFlight = flightRepository.save(flight);
 
-        FlightDto savedFlightDto = modelMapper.map(savedFlight, FlightDto.class);
-
-        return savedFlightDto;
+        return modelMapper.map(savedFlight, FlightDto.class);
     }
 
     @Override
@@ -47,3 +42,5 @@ public class FlightServiceImpl implements FlightService{
                 .collect(Collectors.toList());
     }
 }
+
+
