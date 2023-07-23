@@ -20,6 +20,6 @@ public class PassengerDto {
     @Email(message = "email should be a valid email address")
     private String email;
 
-    @Pattern(regexp = "^(\\+[0-9]{1,3}[- ]?)?\\(?[0-9]{3}\\)?[- ]?[0-9]{3}[- ]?[0-9]{4}$", message = "Phone number should be in a valid format")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number should be a 10-digit number")
     private String phone;
 }
